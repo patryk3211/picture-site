@@ -1,0 +1,27 @@
+.main {
+  padding: 1rem;
+}
+
+.navbar {
+  margin-bottom: 1rem;
+}
+
+.image-preview .overlay {
+  transition: 150ms ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.image-preview:hover .overlay {
+  visibility: visible;
+  opacity: 1;
+}
+
+.image-preview .delete {
+  transition: 150ms ease-in-out;
+}
+
+.image-preview .delete:hover {
+  color: var(--bs-red);
+}
+
