@@ -1,7 +1,7 @@
 ## Instalacja
 Przed uruchomieniem aplikacji należy sprawdzić pliki konfiguracji w folderze `config`.
 Należy skonfigurować serwer HTTP aby katalog `public` był katalogiem głównym,
-następnie w przeglądarce trzeba wejść na `[ADRES_SERWERA]/install`, aby
+następnie w przeglądarce trzeba wejść na `[ADRES_SERWERA][PRZEDROSTEK_URL]/install/`, aby
 dokończyć proces instalacji. Stworzy to potrzebne tabele w bazie danych.
 
 ### Uwaga!
