@@ -89,16 +89,17 @@ class User {
     return password_verify($this->password, $passHash);
   }
 
-  public function change_password(string $newPassword): Response|bool {
+  public function change_password(string $newPassword, ?bool $changeAfterLogin = null): bool {
     if($this->id == null)
       return false;
     $hash = password_hash($newPassword, null);
     if(!$hash)
-      return response_code(500);
+      return false;
 
     $db = database();
-    $stmt = $db->prepare("UPDATE ".DATABASE_TABLE_PREFIX."users SET Password = ?, ChangePassword = 0 WHERE UserId = ?");
-    $stmt->bind_param('si', $hash, $this->id);
+    $stmt = $db->prepare("UPDATE ".DATABASE_TABLE_PREFIX."users SET Password = ?, ChangePassword = ? WHERE UserId = ?");
+    $change = $changeAfterLogin ? 1 : 0;
+    $stmt->bind_param('sii', $hash, $change, $this->id);
     return $stmt->execute();
   }
 

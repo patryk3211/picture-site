@@ -94,7 +94,7 @@
     </div>
     <div class="modal fade" data-bs-backdrop="static" id="editusermodal">
       <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content mb-2">
           <div class="modal-header">
             <h2 class="modal-title">Edytowanie użytkownika</h2>
           </div>
@@ -107,28 +107,34 @@
             <div class="form-group mb-2 clearfix">
               <input class="align-middle form-check-input ms-1 mt-0" type="checkbox" id="edit-check-change-password" name="changepassword" />
               <label class="align-middle form-check-label ms-1" for="edit-check-change-password">Zmiana hasła po logowaniu</label>
-              <button class="align-middle btn btn-primary float-end">Zmień hasło</button>
+              <button class="align-middle btn btn-primary float-end" id="edit-pass-change">Zmień hasło</button>
             </div>
           </div>
           <div class="modal-body border-top">
             <h5>Uprawnienia</h5>
             <div class="form-group">
-              <input class="form-check-input ms-1" type="checkbox" id="check-manage-users" name="manageusers" />
-              <label class="form-check-label ms-1" for="check-manage-users">Zarządzanie użytkownikami</label>
+              <input class="form-check-input ms-1" type="checkbox" id="edit-check-manage-users" name="manageusers" />
+              <label class="form-check-label ms-1" for="edit-check-manage-users">Zarządzanie użytkownikami</label>
             </div>
             <div class="form-group">
-              <input class="form-check-input ms-1" type="checkbox" id="check-add-pictures" name="addpictures" />
-              <label class="form-check-label ms-1" for="check-add-pictures">Dodawanie zdjęć</label>
+              <input class="form-check-input ms-1" type="checkbox" id="edit-check-add-pictures" name="addpictures" />
+              <label class="form-check-label ms-1" for="edit-check-add-pictures">Dodawanie zdjęć</label>
             </div>
             <div class="form-group">
-              <input class="form-check-input ms-1" type="checkbox" id="check-delete-pictures" name="deletepictures" />
-              <label class="form-check-label ms-1" for="check-delete-pictures">Usuwanie zdjęć</label>
+              <input class="form-check-input ms-1" type="checkbox" id="edit-check-delete-pictures" name="deletepictures" />
+              <label class="form-check-label ms-1" for="edit-check-delete-pictures">Usuwanie zdjęć</label>
+            </div>
+            <div class="form-group clearfix">
+              <button class="btn btn-primary float-end" id="edit-perm-change">Zmień uprawnienia</button>
             </div>
           </div>
           <div class="modal-footer">
+            <input type="hidden" id="edit-user-id" />
             <button class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
           </div>
         </div>
+        <div id="editalert" class="alert alert-danger collapse"></div>
+        <div id="editsuccess" class="alert alert-success collapse"></div>
       </div>
     </div>
   </body>

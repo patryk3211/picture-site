@@ -54,8 +54,6 @@ class AdminApiController {
     $user = new User($json->user, $json->password);
     if($user->auth_user()) {
       $result = $user->change_password($json->newpassword);
-      if($result instanceof Response)
-        return $result;
       return response_json([ 'result' => $result ]);
     } else {
       return response_code(401);
@@ -373,6 +371,76 @@ class AdminApiController {
     }
 
     return response_json($response);
+  }
+
+  public function admin_change_password($json) {
+    $response = AdminApiController::check_auth($json);
+    if($response != null) {
+      // Not authenticated
+      return $response;
+    }
+
+    if(!AdminApiController::check_permission(AdminApiController::PERMISSION_MANAGE_USERS)) {
+      // Not permitted
+      return response_code(401);
+    }
+
+    if(!isset($json->userid) || !isset($json->password)) {
+      return response_code(400);
+    }
+
+    $user = User::from_id($json->userid);
+    if($user instanceof Response)
+      return $user;
+
+    $change = false;
+    if(isset($json->changepassword) && $json->changepassword)
+      $change = true;
+    if(!$user->change_password($json->password, $change))
+      return response_code(500);
+    return response_code(200);
+  }
+
+  public function change_permissions($json) {
+    $response = AdminApiController::check_auth($json);
+    if($response != null) {
+      // Not authenticated
+      return $response;
+    }
+
+    if(!AdminApiController::check_permission(AdminApiController::PERMISSION_MANAGE_USERS)) {
+      // Not permitted
+      return response_code(401);
+    }
+
+    if(!isset($json->userid)) {
+      return response_code(400);
+    }
+    
+    if($_SESSION['user_id'] == $json->userid) {
+      // Cannot change our own permissions
+      return response_code(401);
+    }
+
+    $perms = [];
+    if(isset($json->manageusers)) {
+      $perms['Perm_ManageUsers'] = $json->manageusers ? 1 : 0;
+    }
+    if(isset($json->addpictures)) {
+      $perms['Perm_AddPictures'] = $json->addpictures ? 1 : 0;
+    }
+    if(isset($json->deletepictures)) {
+      $perms['Perm_DeletePictures'] = $json->deletepictures ? 1 : 0;
+    }
+    if(count($perms) == 0)
+      return response_code(401);
+
+    $user = User::from_id($json->userid);
+    if($user instanceof Response)
+      return $user;
+    if(!$user->set_permissions($perms))
+      return response_code(500);
+    return response_code(200);
   }
 }
 

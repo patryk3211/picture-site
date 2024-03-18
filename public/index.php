@@ -4,9 +4,11 @@
     <title>Zdjęcia</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php $validateSession = false; require __DIR__.'/../utility/head.php'; ?>
-    <script src="js/picture_fetch.js"></script>
-    <link href="css/gallery.css" rel="stylesheet">
+<?php
+$validateSession = false; require __DIR__.'/../utility/head.php';
+echo "<script src=\"$prefix/js/picture_fetch.js\"></script>";
+echo "<link href=\"$prefix/css/gallery.css\" rel=\"stylesheet\">";
+?>
   </head>
   <body class="bg-dark">
     <?php $noLogin = false; require __DIR__.'/../utility/nav.php'; ?>

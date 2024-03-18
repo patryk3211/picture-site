@@ -9,7 +9,7 @@ async function changePassword() {
       obj._element.textContent = json.message;
       obj.show();
     } else if(json.result) {
-      location.assign('/login/');
+      location.assign(URL_PREFIX + '/login/');
     }
   }
 }

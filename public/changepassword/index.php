@@ -28,7 +28,10 @@
         </div>
         <div class="form-group mb-2">
           <label for="newpassword">Nowe hasło</label>
-          <input class="form-control" type="password" name="newpassword" id="newpassword" />
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+            <input class="form-control" type="password" name="newpassword" id="newpassword" />
+          </div>
         </div>
         <div id="passwordalert" class="alert alert-danger collapse" role="alert">
         </div>
